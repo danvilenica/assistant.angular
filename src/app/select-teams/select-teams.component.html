@@ -1,0 +1,41 @@
+<div class="select-wrapper">
+  <div class="home">
+    <div>
+      <h5>Home team</h5>
+      <hr>
+    </div>
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-dark" id="homeLeague" ngbDropdownToggle>{{selectedHomeLeague}}</button>
+      <div ngbDropdownMenu aria-labelledby="homeLeague">
+        <button class="dropdown-item" *ngFor="let league of leagues" [value]="homeLeague" (click)="onHomeLeagueSelect(league)">{{league.name}}</button>
+      </div>
+    </div>
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-dark" id="homeTeam" ngbDropdownToggle>{{selectedHomeTeam}}</button>
+      <div ngbDropdownMenu aria-labelledby="homeTeam">
+        <button class="dropdown-item" *ngFor="let team of homeTeams" [value]="homeTeam" (click)="onHomeTeamSelect(team)">{{team.name}}</button>
+      </div>
+    </div>
+  </div>
+  <div class="away">
+    <div>
+      <h5>Away team</h5>
+      <hr>
+    </div>
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-dark" id="awayLeague" ngbDropdownToggle>{{selectedAwayLeague}}</button>
+      <div ngbDropdownMenu aria-labelledby="awayLeague">
+        <button class="dropdown-item" *ngFor="let league of leagues" [value]="awayLeague" (click)="onAwayLeagueSelect(league)">{{league.name}}</button>
+      </div>
+    </div>
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-dark" id="awayTeam" ngbDropdownToggle>{{selectedAwayTeam}}</button>
+      <div ngbDropdownMenu aria-labelledby="awayTeam">
+        <button class="dropdown-item" *ngFor="let team of awayTeams" [value]="awayTeam" (click)="onAwayTeamSelect(team)">{{team.name}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="compare">
+  <button class="btn btn-dark" (click)="onCompareClick()" [disabled]="!homeTeam || !awayTeam">Compare ></button>
+</div>

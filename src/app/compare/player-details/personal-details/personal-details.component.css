@@ -1,0 +1,40 @@
+.title {
+  text-align: left;
+  padding-top: 10px;
+}
+
+.image {
+  padding: 10px;
+  text-align: center;
+}
+
+.personal-details-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-row{
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-name {
+  text-align: left;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: var(--front);
+  margin-bottom: 10px;
+  padding-left: 25px;
+}
+
+.details {
+  color: var(--front);
+  font-size: 1.3em;
+  text-align: right;
+  padding-right: 25px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  padding-left: 25px;
+}

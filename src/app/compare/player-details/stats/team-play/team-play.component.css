@@ -1,0 +1,21 @@
+.team-play-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: 100px;
+  align-items: center;
+  justify-items: center;
+}
+
+h6 {  
+  height: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--front);
+}
+
+p {
+  font-size: 2.5em;
+  font-family: 'Spartan';
+  text-align: center;
+}

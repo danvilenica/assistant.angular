@@ -1,0 +1,22 @@
+<div class="compare-wrapper">
+  <div class="home-details">
+    <app-player-details [player]="homePlayer" id="homePlayer"></app-player-details>
+  </div>
+  <div class="list-and-stats">
+    <div class="duel-stats">
+      <app-duel-stats 
+        [duelStats]="duelStats" 
+        [homeName]="teams[0].name" 
+        [homeImagePath]="teams[0].imagePath" 
+        [awayName]="teams[1].name"
+        [awayImagePath]="teams[1].imagePath"
+        ></app-duel-stats>
+    </div>
+    <div class="player-list">
+      <app-player-list [teams]="teams"></app-player-list>
+    </div>
+  </div>
+  <div class="away-details">
+    <app-player-details [player]="awayPlayer" id="awayPlayer"></app-player-details>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="player-details-wrapper">
+  <div class="personalDetails">
+    <app-personal-details [personalDetails]="player.personalDetails"></app-personal-details>
+  </div>
+  <div class="socialInfo">
+    <app-social-info [socialInfo]="player.socialNetworkInfo"></app-social-info>
+  </div>
+  <div class="leagueRecord">
+    <app-league-record [leagueRecord]="player.leagueRecord"></app-league-record>
+  </div>
+  <div class="stats">
+    <app-stats [stats]="player.stats"></app-stats>
+  </div>
+</div>

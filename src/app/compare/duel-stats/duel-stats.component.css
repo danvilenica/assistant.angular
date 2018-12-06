@@ -1,0 +1,35 @@
+.duel {
+  background-color: var(--white);
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 10px 3px var(--gray);
+  box-shadow: 0px 0px 10px 3px var(--gray);
+}
+
+.title {
+  text-align: center;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+p {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.statNames {
+  text-align: center;
+  border-right: 3px solid red;
+  border-left: 3px solid red;
+}
+
+.stats {
+  text-align: center;
+}
+
+.duel-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  padding-bottom: 22px;
+}

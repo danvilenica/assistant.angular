@@ -1,0 +1,12 @@
+<div class="list-wrapper">
+  <ul class="list-home">
+    <li *ngFor="let player of teams[0].players" (click)="onHomeSelect(player)">
+      <span>{{ player.personalDetails.name }} {{ player.personalDetails.lastName }}&nbsp; {{ player.number }}</span>
+    </li>
+  </ul>
+  <ul class="list-away">
+    <li *ngFor="let player of teams[1].players" (click)="onAwaySelect(player)">
+      <span>{{ player.personalDetails.name }} {{ player.personalDetails.lastName }}&nbsp; {{ player.number }}</span>
+    </li>
+  </ul>
+</div>

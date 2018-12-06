@@ -1,0 +1,46 @@
+.select-wrapper {
+  display: flex;
+  padding: 80px 0 20px 0;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.home,
+.away {
+  justify-content: space-around;
+  min-width: 375px;
+  min-height: 250px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 10px 3px var(--gray);
+  box-shadow: 0px 0px 10px 3px var(--gray);
+}
+
+@media screen and (max-width: 760px) {
+  .home {
+    margin-bottom: 20px;
+  }
+}
+
+.btn-outline-dark {
+  width: 90%;
+}
+
+.dropdown-item:active {
+  background-color: var(--gray);
+}
+
+.btn-outline-dark :hover {
+  background-color: var(--blue);
+}
+
+.compare {
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-menu {
+  width: 90%;
+}

@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: dojche;
+  src: url(assets/fonts/Deutschlander.otf) format("opentype");
+}
+
+@font-face {
+  font-family: Alegra-regular;
+  src: url(assets/fonts/AlegreyaSansSC-Regular.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: Spartan;
+  src: url(assets/fonts/SpartanMB-Black.otf) format("opentype");
+}
+
+:root {
+  --white: #f5f5f5;
+  --blue: #0f1626;
+  --gray: #6E7E85;
+  --darkGray: #3C4549;  
+  --gold: #ab987a;
+  --darkGold: #6D614E;
+  --red: #ff533d;
+  --darkRed: #74261C;
+  --green:#73956F;
+  --shadow:#0f1626;
+  --lightBlue:#9AADBF;
+  --darkLightBlue:#545F69;
+}
+
+hr {
+  width: 89%;
+  height: 2px;
+  background: var(--red);
+}
+
+body {
+  background-color: var(--white);
+  font-family: 'Alegra-regular';
+}
+
+h5,
+h3 {  
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--blue);
+}
+
+
+
+

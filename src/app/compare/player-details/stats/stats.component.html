@@ -1,0 +1,24 @@
+<div class="title">
+    <h3>Stats</h3>
+    <hr>
+</div>
+<div class="dropdown-wrapper">
+  <div class="dropdown">
+    <button class="dropbtn">Select season</button>
+    <div class="dropdown-content">
+      <a *ngFor="let item of stats" (click)="onSeasonSelect(item)">{{item.season}}</a>    
+    </div>
+  </div>
+</div>
+<div class="stats-select-wrapper">
+  <div (click)="onAttackSelect()" class="attack">Attack</div>
+  <div (click)="onDefenseSelect()" class="defense">Defense</div>
+  <div (click)="onTeamPlaySelect()" class="teamPlay">Team play</div>
+  <div (click)="onDisciplineSelect()" class="discipline">Discipline</div>
+</div>
+<div [ngSwitch]="selected" class="stats-wrapper">
+  <app-attack *ngSwitchCase="0" [attack]="stat.attack"></app-attack>
+  <app-defense *ngSwitchCase="1" [defense]="stat.defense"></app-defense>
+  <app-team-play *ngSwitchCase="2" [playerTeamPlay]="stat.playerTeamPlay"></app-team-play>
+  <app-discipline *ngSwitchCase="3" [discipline]="stat.discipline"></app-discipline>
+</div>
