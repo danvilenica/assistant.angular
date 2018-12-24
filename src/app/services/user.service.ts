@@ -13,22 +13,12 @@ export class UserService {
 
   getAll() {
     const token = this.authService.getToken();
-    return this.http.get<User[]>(`${environment.apiUrl}/users`, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json'
-      })
-    });
+    return this.http.get<User[]>(`${environment.apiUrl}/users`);
   }
 
   getById(id: number) {
     const token = this.authService.getToken();
-    return this.http.get(`${environment.apiUrl}/users/` + id, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json'
-      })
-    });
+    return this.http.get(`${environment.apiUrl}/users/` + id);
   }
 
   register(user: User) {
@@ -37,21 +27,11 @@ export class UserService {
 
   update(user: User) {
     const token = this.authService.getToken();
-    return this.http.put(`${environment.apiUrl}/users/` + user.id, user, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json'
-      })
-    });
+    return this.http.put(`${environment.apiUrl}/users/` + user.id, user);
   }
 
   delete(id: number) {
     const token = this.authService.getToken();
-    return this.http.delete(`${environment.apiUrl}/users/` + id, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json'
-      })
-    });
+    return this.http.delete(`${environment.apiUrl}/users/` + id);
   }
 }
