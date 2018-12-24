@@ -12,8 +12,9 @@ import { PersonalDetails } from '../models/personalDetails.model';
 import { SocialNetworkInfo } from '../models/socialNetworkInfo.model';
 import { LeagueRecord } from '../models/leagueRecord.model';
 import { Subscription } from 'rxjs';
-import { PlayerListComponent } from './player-list/player-list.component';
 import { DuelStats } from '../models/duelStats.model';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-compare',
@@ -33,7 +34,8 @@ export class CompareComponent implements OnInit {
 
   constructor(public route: ActivatedRoute,
     public router: Router,
-    public ts: TeamService) { }
+    public teamService: TeamService
+    ) { }
 
   attack: Attack = new Attack('lkmdsf', 55, 22, 234, 34, 23, 234, 235, 32, 23, 23, 23, 5);
   defense: Defense = new Defense('lksd', 34, 34, 53, 2, 3, 5, 2, 6, 45, 65, 23, 12, 2);
@@ -88,17 +90,17 @@ export class CompareComponent implements OnInit {
     this.homePlayer = this.homeTeam.players[0];
     this.awayPlayer = this.awayTeam.players[0];
 
-    this.ts.changeHomePlayer.subscribe(
+    this.teamService.changeHomePlayer.subscribe(
       (player: Player) => {
         this.homePlayer = player;
       });
 
-    this.ts.changeAwayPlayer.subscribe(
+    this.teamService.changeAwayPlayer.subscribe(
       (player: Player) => {
         this.awayPlayer = player;
       });
 
-    this.duelStats = this.ts.getDuelStats('1', '2');
+    this.duelStats = this.teamService.getDuelStats('1', '2');
     // this.ts.getTeamById(this.homeId).subscribe(
     //   (team: Team) => {
     //     this.homeTeam = team;
@@ -112,5 +114,6 @@ export class CompareComponent implements OnInit {
     //     this.homeTeam.players.push(this.player);
     //     this.homeTeam.players.push(this.player2);
     //   });
+    
   }
 }

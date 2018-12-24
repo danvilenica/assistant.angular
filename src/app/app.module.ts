@@ -2,14 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppComponent } from './app.component';
-import { AuthComponent } from './auth/auth.component';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { SelectTeamsComponent } from './select-teams/select-teams.component';
 import { CompareComponent } from './compare/compare.component';
-import { TeamComponent } from './team/team.component';
 import { PlayerListComponent } from './compare/player-list/player-list.component';
 import { PlayerDetailsComponent } from './compare/player-details/player-details.component';
 import { PersonalDetailsComponent } from './compare/player-details/personal-details/personal-details.component';
@@ -22,14 +19,17 @@ import { DefenseComponent } from './compare/player-details/stats/defense/defense
 import { TeamPlayComponent } from './compare/player-details/stats/team-play/team-play.component';
 import { DiscipineComponent } from './compare/player-details/stats/discipine/discipine.component';
 import { DuelStatsComponent } from './compare/duel-stats/duel-stats.component';
+import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthenticationService } from './services/authentication.service';
+import { AlertService } from './services/alert.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
     SelectTeamsComponent,
     CompareComponent,
-    TeamComponent,
     PlayerListComponent,
     PlayerDetailsComponent,
     CompareComponent,
@@ -41,16 +41,23 @@ import { DuelStatsComponent } from './compare/duel-stats/duel-stats.component';
     DefenseComponent,
     TeamPlayComponent,
     DiscipineComponent,
-    DuelStatsComponent,
+    DuelStatsComponent
   ],
   imports: [
     BrowserModule,
     CoreModule,
     HttpClientModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    AuthModule
   ],
-  providers: [TeamService],
+  providers: [
+    TeamService,
+    UserService,
+    AuthGuard,
+    AuthenticationService,
+    AlertService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

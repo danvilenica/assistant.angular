@@ -1,0 +1,21 @@
+.login-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0 auto;
+  padding: 80px 30px;
+}
+
+a {
+  text-decoration: none !important;
+  cursor: pointer;
+  color: var(--blue);
+}
+
+a:hover {
+  color: var(--gray);
+}
+
+input:focus {
+  box-shadow: 0 0 5px var(--gray);
+  border: 1px solid var(--blue);
+}
