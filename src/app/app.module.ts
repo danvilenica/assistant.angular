@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -24,6 +25,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService } from './services/alert.service';
 import { UserService } from './services/user.service';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { SharedModule } from './directives/shared.module';
 
 @NgModule({
   declarations: [
@@ -49,14 +53,18 @@ import { UserService } from './services/user.service';
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
-    AuthModule
+    AuthModule,
+    CommonModule,
+    SharedModule
   ],
   providers: [
     TeamService,
     UserService,
     AuthGuard,
     AuthenticationService,
-    AlertService
+    AlertService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
