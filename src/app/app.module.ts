@@ -28,6 +28,7 @@ import { UserService } from './services/user.service';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { SharedModule } from './directives/shared.module';
+import { LeagueService } from './services/league.service';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { SharedModule } from './directives/shared.module';
     SharedModule
   ],
   providers: [
+    LeagueService,
     TeamService,
     UserService,
     AuthGuard,

@@ -8,13 +8,17 @@
   padding: 80px 30px;
 }
 
+img {
+  justify-items: center;
+}
+
 .home-details,
 .away-details,
-.list-and-stats{
+.list-and-stats {
   color: var(--blue);
 }
 
-.duel-stats{
+.duel-stats {
   padding-bottom: 26px;
 }
 
@@ -32,8 +36,8 @@
 
 @media screen and (max-width: 770px) {
   .compare-wrapper {
-    grid-template-columns: 1fr;    
-    padding:80px 5px;    
+    grid-template-columns: 1fr;
+    padding: 80px 5px;
   }
 
   .list-and-stats {

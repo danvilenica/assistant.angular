@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
-  token: string;
+  public token: string;
   constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string) {
@@ -23,7 +23,6 @@ export class AuthenticationService {
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.token = user.token;
           }
-
           return user;
         })
       );
@@ -34,6 +33,16 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
     this.token = null;
     this.router.navigate(['/login']);
+  }
+
+  authenticate(user: {
+    id: number;
+    username: string;
+    firstName: string;
+    lastName: string;
+    token: string;
+  }) {
+    this.token = user.token;
   }
 
   isAuthenticated() {

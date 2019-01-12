@@ -12,17 +12,5 @@ export class Player {
     public leagueRecord: LeagueRecord;
     public stats: Stats[];
 
-    constructor($id: string,
-        $personalDetails: PersonalDetails,
-        $socialNetworkInfo: SocialNetworkInfo,
-        $leagueRecord: LeagueRecord,
-        $stats: Stats[]) {
-        this.id = $id;
-        this.personalDetails = $personalDetails;
-        this.socialNetworkInfo = $socialNetworkInfo;
-        this.leagueRecord = $leagueRecord;
-        this.stats = $stats;
-    }
-
 }
 

@@ -1,122 +1,204 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { League } from '../models/league.model';
 import { Team } from '../models/team.model';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { DdlLeague } from '../models/ddlLeague.model';
-import { DdlTeam } from '../models/ddlTeam.model';
 import { Player } from '../models/player.model';
-import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { DuelStats } from '../models/duelStats.model';
-
+import { Stats } from '../models/stats.model';
+import { Attack } from '../models/attack.model';
+import { PlayerTeamPlay } from '../models/playerTeamPlay.model';
+import { Discipline } from '../models/discipline.model';
+import { Defense } from '../models/defense.model';
 
 @Injectable()
 export class TeamService {
-    leagues: DdlLeague[] = [
-        new DdlLeague('1', 'Premier League'),
-        new DdlLeague('2', 'Hrvatska liga'),
-        new DdlLeague('3', 'Njemačka liga')
-    ];
-    teams: DdlTeam[] = [
-        new DdlTeam('1', 'Manchester United', '1'),
-        new DdlTeam('2', 'Zagreb Dinamo', '2'),
-        new DdlTeam('3', 'Hajduk', '2'),
-        new DdlTeam('4', 'Osijek', '2'),
-        new DdlTeam('5', 'Liverpool', '1'),
-        new DdlTeam('6', 'WestHam', '1'),
-        new DdlTeam('7', 'Arsenal', '1'),
-        new DdlTeam('8', 'Rijeka', '2')
-    ];
+  homePlayer: Player;
+  awayPlayer: Player;
+  @Output() changeHomePlayer: EventEmitter<Player> = new EventEmitter();
+  @Output() changeAwayPlayer: EventEmitter<Player> = new EventEmitter();
 
-    duelStats: DuelStats = new DuelStats();
+  constructor(private http: HttpClient) {}
 
-    homePlayer: Player;
-    awayPlayer: Player;
-    @Output() changeHomePlayer: EventEmitter<Player> = new EventEmitter();
-    @Output() changeAwayPlayer: EventEmitter<Player> = new EventEmitter();
+  public getHomePlayer(): Player {
+    return this.homePlayer;
+  }
 
-    constructor(private http: HttpClient) { }
+  public setHomePlayer(player: Player) {
+    if (player !== this.homePlayer) {
+      this.homePlayer = player;
+      this.homePlayer.stats = this.setAllTime(this.homePlayer.stats);
+      this.changeHomePlayer.emit(player);
+    }
+  }
 
-    public getHomePlayer(): Player {
-        return this.homePlayer;
-    }
-    public setHomePlayer(player: Player) {
-        if (player !== this.homePlayer) {
-            this.homePlayer = player;
-            this.changeHomePlayer.emit(player);
-        }
-    }
-    public getAwayPlayer(): Player {
-        return this.awayPlayer;
-    }
-    public setAwayPlayer(player: Player) {
-        if (player !== this.awayPlayer) {
-            this.awayPlayer = player;
-            this.changeAwayPlayer.emit(player);
-        }
-    }
+  public getAwayPlayer(): Player {
+    return this.awayPlayer;
+  }
 
-    getAllLeagues() {
-        // const dataSub = new Subject<DdlLeague[]>();
-        // dataSub.next(this.leagues);
-        // this.http.get(
-        //     ``)
-        //     .subscribe((leagues: DdlLeague[]) => {
-        //         dataSub.next(leagues);
-        //     }, (err) => {
-        //         console.log(err);
-        //     });
-        // return this.http.get('/api/leagues').map((res: Response) => res.json());
-        // this.httpClient.get<League[]>('https://ng-recipe-book-3adbb.firebaseio.com/recipes.json', {
-        //     observe: 'body',
-        //     responseType: 'json'
-        // })
-        //     .subscribe(
-        //         (leagues: League[]) => {
-        //             this.leagues = leagues;
-        //         }
-        //     );
-        return this.leagues;
+  public setAwayPlayer(player: Player) {
+    if (player !== this.awayPlayer) {
+      this.awayPlayer = player;
+      this.awayPlayer.stats = this.setAllTime(this.awayPlayer.stats);
+      this.changeAwayPlayer.emit(player);
     }
+  }
 
-    getAllTeamsByLeagueId(id: string): DdlTeam[] {
-        // this.httpClient.get<Team[]>('https://ng-recipe-book-3adbb.firebaseio.com/recipes.json', {
-        //     observe: 'body',
-        //     responseType: 'json'
-        // })
-        //     .subscribe(
-        //         (teams: Team[]) => {
-        //             this.teams = teams;
-        //         }
-        //     );
-        const teamsSelected = this.teams.filter(x => x.leagueId === id);
-        return teamsSelected;
-    }
+  getTeamStatsByIds(homeId: number, awayId: number) {
+    const ids = {
+      homeId: homeId,
+      awayId: awayId
+    };
 
-    getTeamById(id: string): DdlTeam {
-        // this.httpClient.get('http:\\localhost:')
-        return this.teams.find(x => x.id === id);
-    }
+    return this.http.post(`${environment.apiUrl}/teams`, ids);
+  }
 
-    getDuelStats(homeId: string, awayId: string): DuelStats {
-        this.duelStats.awayId = '2';
-        this.duelStats.awayWins = 15;
-        this.duelStats.awayPenaltiesScored = 3;
-        this.duelStats.awayPenaltiesWon = 8;
-        this.duelStats.awayRedCards = 5;
-        this.duelStats.awayYellowCards = 15;
-        this.duelStats.awayGoals = 29;
-        this.duelStats.awayCleanSheets = 9;
-        this.duelStats.homeId = '1';
-        this.duelStats.homeWins = 19;
-        this.duelStats.homePenaltiesScored = 2;
-        this.duelStats.homePenaltiesWon = 4;
-        this.duelStats.homeRedCards = 3;
-        this.duelStats.homeYellowCards = 10;
-        this.duelStats.homeGoals = 39;
-        this.duelStats.homeCleanSheets = 3;
-        this.duelStats.drawn = 20;
-        this.duelStats.played = 54;
-        return this.duelStats;
-    }
+  getAllLeagues() {
+    return this.http.get<DdlLeague[]>(`${environment.apiUrl}/leagues`);
+  }
+
+  setAllTime(stats: Stats[]): Stats[] {
+    let goals = 0;
+    let goalsPerMatch = 0;
+    let headedGoals = 0;
+    let goalsWithRightFoot = 0;
+    let goalsWithLeftFoot = 0;
+    let penaltiesScored = 0;
+    let freekicksScored = 0;
+    let shots = 0;
+    let shotsOnTarget = 0;
+    let accuracy = 0;
+    let hitWoodwork = 0;
+    let bigChancesMissed = 0;
+
+    let assists = 0;
+    let passes = 0;
+    let passesPerMatch = 0;
+    let bigChancesCreated = 0;
+    let crosses = 0;
+    let accuracyT = 0;
+    let throughBalls = 0;
+    let accurateLongBalls = 0;
+
+    let yellowCards = 0;
+    let redCards = 0;
+    let fauls = 0;
+    let offsides = 0;
+
+    let tackles = 0;
+    let tacklesSuccess = 0;
+    let blockedShots = 0;
+    let interceptions = 0;
+    let clearances = 0;
+    let headedClearance = 0;
+    let recoveries = 0;
+    let duelsWon = 0;
+    let duelsLost = 0;
+    let successful = 0;
+    let errorsLeadingToGoal = 0;
+    let aerialBattlesWon = 0;
+    let aerialBattlesLost = 0;
+
+    stats.forEach(stat => {
+      goals += stat.attack.goals;
+      goalsPerMatch += stat.attack.goalsPerMatch;
+      headedGoals += stat.attack.headedGoals;
+      goalsWithRightFoot += stat.attack.goalsWithRightFoot;
+      goalsWithLeftFoot += stat.attack.goalsWithLeftFoot;
+      penaltiesScored += stat.attack.penaltiesScored;
+      freekicksScored += stat.attack.freekicksScored;
+      shots += stat.attack.shots;
+      shotsOnTarget += stat.attack.shotsOnTarget;
+      accuracy += stat.attack.accuracy;
+      hitWoodwork += stat.attack.hitWoodwork;
+      bigChancesMissed += stat.attack.bigChancesMissed;
+
+      assists += stat.playerTeamPlay.assists;
+      passes += stat.playerTeamPlay.passes;
+      passesPerMatch += stat.playerTeamPlay.passesPerMatch;
+      bigChancesCreated += stat.playerTeamPlay.bigChancesCreated;
+      crosses += stat.playerTeamPlay.crosses;
+      accuracyT += stat.playerTeamPlay.accuracy;
+      throughBalls += stat.playerTeamPlay.throughBalls;
+      accurateLongBalls += stat.playerTeamPlay.accurateLongBalls;
+
+      yellowCards += stat.discipline.yellowCards;
+      redCards += stat.discipline.redCards;
+      fauls += stat.discipline.fauls;
+      offsides += stat.discipline.offsides;
+
+      tackles += stat.defense.tackles;
+      tacklesSuccess += stat.defense.tacklesSuccess;
+      blockedShots += stat.defense.blockedShots;
+      interceptions += stat.defense.interceptions;
+      clearances += stat.defense.clearances;
+      headedClearance += stat.defense.headedClearance;
+      recoveries += stat.defense.recoveries;
+      duelsWon += stat.defense.duelsWon;
+      duelsLost += stat.defense.duelsLost;
+      successful += stat.defense.successful;
+      errorsLeadingToGoal += stat.defense.errorsLeadingToGoal;
+      aerialBattlesWon += stat.defense.aerialBattlesWon;
+      aerialBattlesLost += stat.defense.aerialBattlesLost;
+    });
+    const allTimeAttack = new Attack(
+      '1',
+      goals,
+      goalsPerMatch,
+      headedGoals,
+      goalsWithRightFoot,
+      goalsWithLeftFoot,
+      penaltiesScored,
+      freekicksScored,
+      shots,
+      shotsOnTarget,
+      accuracy,
+      hitWoodwork,
+      bigChancesMissed
+    );
+    const allTimePlayerTeamPlay = new PlayerTeamPlay(
+      '1',
+      assists,
+      passes,
+      passesPerMatch,
+      bigChancesCreated,
+      crosses,
+      accuracyT,
+      throughBalls,
+      accurateLongBalls
+    );
+    const allTimeDiscipleine = new Discipline(
+      '1',
+      yellowCards,
+      redCards,
+      fauls,
+      offsides
+    );
+    const allTimeDefense = new Defense(
+      '1',
+      tackles,
+      tacklesSuccess,
+      blockedShots,
+      interceptions,
+      clearances,
+      headedClearance,
+      recoveries,
+      duelsWon,
+      duelsLost,
+      successful,
+      errorsLeadingToGoal,
+      aerialBattlesWon,
+      aerialBattlesLost
+    );
+    const allTime = new Stats(
+      '1',
+      'allTime',
+      allTimeAttack,
+      allTimePlayerTeamPlay,
+      allTimeDiscipleine,
+      allTimeDefense
+    );
+    stats.unshift(allTime);
+    return stats;
+  }
 }

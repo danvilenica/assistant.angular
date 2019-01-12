@@ -7,7 +7,7 @@ import { PersonalDetails } from '../../../models/personalDetails.model';
   styleUrls: ['./personal-details.component.css']
 })
 export class PersonalDetailsComponent implements OnInit {
-  @Input() personalDetails: PersonalDetails;
+  @Input('personalDetails') personalDetails: PersonalDetails;
   constructor() { }
 
   ngOnInit() {

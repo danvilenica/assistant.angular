@@ -4,12 +4,16 @@
   <hr/>
 </div>
 <div class="image">
-  <img [src]="personalDetails.imagePath" alt="{{ personalDetails.firstName }}" class="img-responsive" style="max-height: 100px;">
+  <img [src]="personalDetails.imagePath" alt="personalDetails.firstName" class="img-responsive" style="max-height: 100px;">
 </div>
 <div class="personal-details-wrapper">
   <div class="details-row">
-    <span class="details-name">Full Name</span>
-    <span class="details">{{ personalDetails.name }} &nbsp; {{ personalDetails.lastName }}</span>
+    <span class="details-name">First Name</span>
+    <span class="details">{{ personalDetails.firstName }}</span>
+  </div>
+  <div class="details-row">
+    <span class="details-name">Last Name</span>
+    <span class="details">{{ personalDetails.lastName }}</span>
   </div>
   <div class="details-row">
     <span class="details-name">Date Of Birth</span>
@@ -18,5 +22,13 @@
   <div class="details-row">
     <span class="details-name">Nationality</span>
     <span class="details">{{ personalDetails.nationality }}</span>
+  </div>
+  <div class="details-row">
+    <span class="details-name">Height</span>
+    <span class="details">{{ personalDetails.height }}</span>
+  </div>
+  <div class="details-row">
+    <span class="details-name">Weight</span>
+    <span class="details">{{ personalDetails.weight }}</span>
   </div>
 </div>

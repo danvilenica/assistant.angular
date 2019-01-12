@@ -10,5 +10,4 @@ export class Team {
     public imagePath: string;
     public players: Player[];
     public teamStats: TeamStats[];
-    public seasonHistoryStats: SeasonHistoryStats[];
 }
