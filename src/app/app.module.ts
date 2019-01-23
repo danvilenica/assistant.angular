@@ -20,7 +20,6 @@ import { DefenseComponent } from './compare/player-details/stats/defense/defense
 import { TeamPlayComponent } from './compare/player-details/stats/team-play/team-play.component';
 import { DiscipineComponent } from './compare/player-details/stats/discipine/discipine.component';
 import { DuelStatsComponent } from './compare/duel-stats/duel-stats.component';
-import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService } from './services/alert.service';
@@ -29,6 +28,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { SharedModule } from './directives/shared.module';
 import { LeagueService } from './services/league.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -46,15 +46,16 @@ import { LeagueService } from './services/league.service';
     DefenseComponent,
     TeamPlayComponent,
     DiscipineComponent,
-    DuelStatsComponent
+    DuelStatsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     CoreModule,
     HttpClientModule,
+    // AuthModule,
     AppRoutingModule,
     NgbModule,
-    AuthModule,
     CommonModule,
     SharedModule
   ],
