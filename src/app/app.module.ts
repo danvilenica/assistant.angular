@@ -53,7 +53,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserModule,
     CoreModule,
     HttpClientModule,
-    // AuthModule,
     AppRoutingModule,
     NgbModule,
     CommonModule,

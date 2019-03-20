@@ -4,6 +4,7 @@ import { TeamService } from '../services/team.service';
 import { DdlLeague } from '../models/ddlLeague.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../services/alert.service';
+import { League } from '../models/league.model';
 
 @Component({
   selector: 'app-select-teams',
@@ -43,7 +44,7 @@ export class SelectTeamsComponent implements OnInit {
     );
   }
 
-  onHomeLeagueSelect(league) {
+  onHomeLeagueSelect(league: DdlLeague) {
     this.homeLeague = league;
     this.selectedHomeLeague = this.homeLeague.name;
 
@@ -53,12 +54,12 @@ export class SelectTeamsComponent implements OnInit {
     }
   }
 
-  onHomeTeamSelect(team) {
+  onHomeTeamSelect(team: DdlTeam) {
     this.homeTeam = team;
     this.selectedHomeTeam = this.homeTeam.name;
   }
 
-  onAwayLeagueSelect(league) {
+  onAwayLeagueSelect(league: DdlLeague) {
     this.awayLeague = league;
     this.selectedAwayLeague = this.awayLeague.name;
 
@@ -68,7 +69,7 @@ export class SelectTeamsComponent implements OnInit {
     }
   }
 
-  onAwayTeamSelect(team) {
+  onAwayTeamSelect(team: DdlTeam) {
     this.awayTeam = team;
     this.selectedAwayTeam = this.awayTeam.name;
   }

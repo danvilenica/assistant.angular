@@ -12,6 +12,10 @@ img {
   justify-items: center;
 }
 
+i {
+  color: var(--white);
+}
+
 .home-details,
 .away-details,
 .list-and-stats {
@@ -20,6 +24,32 @@ img {
 
 .duel-stats {
   padding-bottom: 26px;
+}
+
+#botButton {
+  height: 70px;
+  width: 70px;
+  border-radius: 10px;
+  background-color: var(--blue);
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+}
+
+iframe {
+  min-width: 320px;
+  width: 30%;
+  height: 77vh;
+  position: fixed;
+  border-radius: 10px;
+  padding: 5px;
+  bottom: 120px;
+  right: 0;
+  background-color: var(--white);
+}
+
+iframe wc-header{
+  background-color: var(--blue);
 }
 
 @media screen and (max-width: 992px) {

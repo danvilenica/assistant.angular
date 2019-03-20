@@ -1,12 +1,12 @@
 div.textContainer {
+  padding: 190px 30px;
   height: 10em;
   display: flex;
   align-items: center;
   justify-content: center
 }
 
-div.textContainer p {
-  font-size: 6em;
-  padding-top: 80px;
-  margin: 20px;
+div.textContainer p{
+  font-size: 4em;
+  font-weight: bold;
 }

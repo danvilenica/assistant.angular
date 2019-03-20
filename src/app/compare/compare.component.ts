@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.model';
 import { Player } from '../models/player.model';
@@ -21,10 +21,10 @@ export class CompareComponent implements OnInit {
   public teams: Team[] = [];
   public homePlayer: Player;
   public awayPlayer: Player;
+  public isSelected = false;
 
   constructor(
     public route: ActivatedRoute,
-    public router: Router,
     public teamService: TeamService,
     public alertService: AlertService
   ) {
@@ -67,5 +67,9 @@ export class CompareComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  onClick() {
+    this.isSelected = !this.isSelected;
   }
 }

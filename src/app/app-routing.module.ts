@@ -8,7 +8,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'select', component: SelectTeamsComponent, canActivate: [AuthGuard] },
   {
     path: 'compare/:homeId/home/:awayId/away',
@@ -21,6 +21,8 @@ const appRoutes: Routes = [
     path: '',
     loadChildren: './auth/auth.module#AuthModule'
   },
+
+  { path: 'error', component: NotFoundComponent },
 
   { path: '**', component: NotFoundComponent }
 ];
